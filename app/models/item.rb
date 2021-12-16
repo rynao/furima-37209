@@ -2,11 +2,12 @@ class Item < ApplicationRecord
   validates :item_name, presence: true
   validates :price, presence: true
   validates :description, presence: true
+  validates :image, presence: true
 
   NUMBER_REGEX = /\A[0-9]+\z/.freeze
   validates_format_of :price, with: NUMBER_REGEX
 
-  validates :price, numericality: { in: 300..9999999 }
+  validates :price, numericality: { greater_than: 299, less_than: 10000000 }
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :ship_cost_id, numericality: { other_than: 1, message: "can't be blank" }
