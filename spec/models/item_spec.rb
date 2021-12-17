@@ -72,6 +72,36 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
+      it 'category_idが1では登録できない' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+      it 'condition_idが1では登録できない' do
+        @item.condition_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it 'ship_cost_idが1では登録できない' do
+        @item.ship_cost_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Ship cost can't be blank")
+      end
+      it 'prefecture_idが1では登録できない' do
+        @item.prefecture_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it 'ship_date_idが1では登録できない' do
+        @item.ship_date_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Ship date can't be blank")
+      end
+      it 'userが紐づいていなければ登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
     end
   end
 end
