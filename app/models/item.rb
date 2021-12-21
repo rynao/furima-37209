@@ -1,17 +1,23 @@
 class Item < ApplicationRecord
-  validates :item_name, presence: true
-  validates :price, presence: true
-  validates :description, presence: true
-  validates :image, presence: true
+
+  with_options presence: true do
+    validates :item_name
+    validates :price
+    validates :description
+    validates :image
+  end
 
   NUMBER_REGEX = /\A[0-9]+\z/.freeze
   validates :price, numericality: { with: NUMBER_REGEX, message: "is invalid. Input half-width characters" }
   validates :price, numericality: { greater_than: 299, less_than: 10000000, message: "is out of setting range" }
-  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :ship_cost_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :ship_date_id, numericality: { other_than: 1, message: "can't be blank" }
+
+  with_options numericality: { other_than: 1, message: "can't be blank" } do
+    validates :category_id
+    validates :condition_id
+    validates :ship_cost_id
+    validates :prefecture_id
+    validates :ship_date_id
+  end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
