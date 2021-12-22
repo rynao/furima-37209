@@ -23,6 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if Purchase.exists?(item_id: params[:id])
+      redirect_to root_path
+    end
   end
 
   def update

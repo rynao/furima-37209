@@ -1,7 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :find_params_user_confirm
+
   def index
+    if Purchase.exists?(item_id: params[:item_id])
+      redirect_to root_path
+    end
     @purchase_address = PurchaseAddress.new
   end
 
