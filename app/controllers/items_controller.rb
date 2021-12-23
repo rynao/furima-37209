@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_params, only: [:show, :edit, :update, :destroy]
   before_action :user_confirm, only: [:edit, :destroy]
+  before_action :purchase_confirm, only: [:edit, :destroy]
+
   def index
     @items = Item.includes(:user).order(id: :desc)
   end
@@ -23,9 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if Purchase.exists?(item_id: params[:id])
-      redirect_to root_path
-    end
   end
 
   def update
@@ -60,4 +59,9 @@ class ItemsController < ApplicationController
     end
   end
 
+  def purchase_confirm
+    if Purchase.exists?(item_id: params[:id])
+      redirect_to root_path
+    end
+  end
 end
