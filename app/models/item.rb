@@ -7,8 +7,7 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  NUMBER_REGEX = /\A[0-9]+\z/.freeze
-  validates :price, numericality: { with: NUMBER_REGEX, message: "is invalid. Input half-width characters" }
+  validates :price, numericality: { message: "is invalid. Input half-width characters" }
   validates :price, numericality: { greater_than: 299, less_than: 10000000, message: "is out of setting range" }
 
   with_options numericality: { other_than: 1, message: "can't be blank" } do
