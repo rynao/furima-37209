@@ -20,5 +20,5 @@ class User < ApplicationRecord
   validates_format_of [:first_name_kana, :family_name_kana], with: KANA_REGEX
 
   has_many :items
-  # has_many :purhases
+  has_many :purchases
 end
