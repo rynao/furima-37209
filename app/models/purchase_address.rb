@@ -10,9 +10,9 @@ class PurchaseAddress
     validates :city
     validates :address_line
     validates :telephone
-    # validates :token, message: "is invalid.Credit card data can't be blank"
-
   end
+
+  validates :token, presence: { message: "is invalid.Credit card data can't be blank" }
 
   POST_CODE_REGEX = /\A[0-9]{3}-[0-9]{4}\z/.freeze
   TELEPHONE_REGEX = /\A\d{10,11}\z/.freeze
